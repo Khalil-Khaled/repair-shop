@@ -1,0 +1,211 @@
+:root {
+  --custom-red: rgb(220 53 69);
+  --gray-200: #d8d8d8;
+  --light-gray: #f7f7f7;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+body {
+  overflow-y: scroll;
+  font-size: 1rem;
+  height: 100%;
+}
+
+html,
+body,
+p,
+h1,
+h2,
+h3 {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  font-size: 1.2em;
+}
+a,
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+}
+a,
+p,
+h1,
+h2,
+h3 {
+  font-family: "Oswald", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  text-transform: uppercase;
+  font-weight: 800;
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 20%;
+  /* display: flex; */
+  background-color: #000000cf;
+}
+.social {
+  background-color: var(--custom-red);
+  height: 20%;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.social-wrapper {
+  display: flex;
+  align-items: center;
+  /* height: inherit; */
+  justify-content: space-around;
+  font-size: 0.8rem;
+  /* vertical-align: middle; */
+  width: 100%;
+}
+.icons i {
+  margin-inline: 0.3rem;
+  font-size: 1rem;
+}
+
+/* navbar start*/
+.navbar-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ffffff70;
+  height: 80%;
+}
+.navbar {
+  width: 70%;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+.dropdown-menu {
+  position: absolute !important;
+  background-color: #ccd4ed8a;
+}
+.dropdown-item {
+  color: #ffffff;
+}
+.nav-link:hover {
+  background-color: #ccd4ed8a;
+}
+.navbar-collapse {
+  position: absolute;
+  top: 100%;
+}
+.logo {
+  width: 20%;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+@media (min-width: 1000px) {
+  .navbar-expand-custom {
+    width: 70%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .navbar-expand-custom .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-expand-custom .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+  .navbar-expand-custom .navbar-collapse {
+    display: flex !important;
+    position: unset;
+    justify-content: center;
+  }
+  .navbar-expand-custom .navbar-toggler {
+    display: none;
+  }
+}
+/* navbar end*/
+
+/* .backgr-dark {
+  background-color: #0000006b;
+  height: 100%;
+  width: 100%;
+} */
+
+.btn {
+  margin-inline: 0.5rem !important;
+  font-weight: 700;
+  border: 2px solid var(--custom-red);
+}
+
+.sign-up-btn {
+  text-transform: uppercase;
+  font-family: "Oswald";
+  width: 15em;
+  border-radius: 0 0 15px 0;
+  font-weight: 900;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  max-width: 10em;
+  min-width: 60%;
+  position: absolute;
+  top: 40%;
+  left: 20%;
+  gap: 2rem;
+}
+.content p {
+  font-size: 1.2em;
+  max-width: 40em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.title {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+.title h2 + * {
+  color: var(--custom-red);
+}
+
+@media (max-width: 615px) {
+  html {
+    font-size: 12px;
+  }
+  .content {
+    left: 7%;
+  }
+}
+
+.background-image {
+  background: url("/img/mechanic-min.jpg") no-repeat center;
+  background-size: cover;
+  height: 80%;
+}
+.dark-background {
+  background-color: #0000006b;
+  height: 100%;
+  width: 100%;
+}
