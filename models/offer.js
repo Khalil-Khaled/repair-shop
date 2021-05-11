@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const offerImageBasePath = "uploads/offerImages";
-const path = require("path");
 
 // creating the schema
 const offerSchema = new mongoose.Schema({
@@ -16,7 +14,11 @@ const offerSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  offerImageName: {
+  offerImage: {
+    type: Buffer,
+    required: true,
+  },
+  offerImageType: {
     type: String,
     required: true,
   },
@@ -31,10 +33,11 @@ const offerSchema = new mongoose.Schema({
 });
 
 offerSchema.virtual("offerImagePath").get(function () {
-  if (this.offerImageName != null) {
-    return path.join("/", offerImageBasePath, this.offerImageName);
+  if (this.offerImage != null && this.offerImageType != null) {
+    return `data:${
+      this.offerImageType
+    };charset=utf-8;base64,${this.offerImage.toString("base64")}`;
   }
 });
 
 module.exports = mongoose.model("Offer", offerSchema);
-module.exports.offerImageBasePath = offerImageBasePath;

@@ -1,26 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const Offer = require("../models/offer");
-const multer = require("multer");
-const path = require("path");
-const uploadPath = path.join("public", Offer.offerImageBasePath);
 const imageMimeTypes = ["image/jpeg", "image/png"];
-const fs = require("fs");
-const upload = multer({
-  dest: uploadPath,
-  fileFilter: (req, file, callback) => {
-    callback(null, imageMimeTypes.includes(file.mimetype));
-  },
-});
 
 // All offers route
 router.get("/", async (req, res) => {
+  let query = Offer.find();
   let searchOptions = {};
   if (req.query.name != null && req.query.name !== "") {
     searchOptions.name = new RegExp(req.query.name, "i");
   }
+  if (req.query.issuedBefore != null && req.query.issuedBefore != "") {
+    query = query.lte("issueDate", req.query.issuedBefore);
+  }
+  if (req.query.issuedAfter != null && req.query.issuedAfter != "") {
+    query = query.gte("issueDate", req.query.issuedAfter);
+  }
   try {
-    const offers = await Offer.find(searchOptions);
+    const offers = await query.exec();
     res.render("offers/index", { offers: offers, searchOptions: req.query });
   } catch {
     res.redirect("/");
@@ -36,16 +33,15 @@ router.get("/new", (req, res) => {
 });
 
 // create offer route
-router.post("/", upload.single("image"), async (req, res) => {
-  const filename = req.file != null ? req.file.filename : null;
+router.post("/", async (req, res) => {
   const offer = new Offer({
     name: req.body.name,
     price: req.body.price,
     discount: req.body.discount,
     issueDate: new Date(req.body.issueDate),
     expirationDate: new Date(req.body.expirationDate),
-    offerImageName: filename,
   });
+  saveImage(offer, req.body.image);
   console.log(offer);
   try {
     const newOffer = await offer.save();
@@ -53,7 +49,6 @@ router.post("/", upload.single("image"), async (req, res) => {
     res.redirect("offers");
   } catch (err) {
     console.log(err);
-    if (offer.offerImageName != null) removeOfferImage(offer.offerImageName);
     res.render("offers/new", {
       offer: offer,
       errorMessage: "Error Creating the offer",
@@ -61,10 +56,13 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-function removeOfferImage(fileName) {
-  fs.unlink(path.join(uploadPath, fileName), (err) => {
-    if (err) console.log(err);
-  });
+function saveImage(offer, imageEncoded) {
+  if (imageEncoded == null) return;
+  const image = JSON.parse(imageEncoded);
+  if (image != null && imageMimeTypes.includes(image.type)) {
+    offer.offerImage = new Buffer.from(image.data, "base64");
+    offer.offerImageType = image.type;
+  }
 }
 
 module.exports = router;
