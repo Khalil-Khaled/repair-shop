@@ -16,10 +16,12 @@ app.use(morgan("tiny"));
 //bodyParser
 app.use(bodyparser.urlencoded({ extended: true }));
 
+// routes
+const indexRouter = require("./routes/index");
+
 //view engine
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
-
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
 
@@ -28,46 +30,18 @@ app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
-app.get("/", (req, res) => {
-  const users = [
-    {
-      _id: "1",
-      name: "khalil khaled",
-      email: "khalil.khaled@esprit.tn",
-      gender: "male",
-      status: "active",
-    },
-    {
-      _id: "1",
-      name: "aziz dreevo",
-      email: "aziz.dreevo@esprit.tn",
-      gender: "male",
-      status: "active",
-    },
-    {
-      _id: "1",
-      name: "wafa hammami",
-      email: "khalil.khale@esprit.tn",
-      gender: "female",
-      status: "active",
-    },
-    {
-      _id: "1",
-      name: "malik nairi",
-      email: "khalil.khale@esprit.tn",
-      gender: "male",
-      status: "active",
-    },
-    {
-      _id: "1",
-      name: "hamza ben turkia",
-      email: "khalil.khale@esprit.tn",
-      gender: "male",
-      status: "active",
-    },
-  ];
-  res.render("index", { users });
+// mongoose
+const mongoose = require("mongoose");
+mongoose.connect(process.env.DATABASE_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+const db = mongoose.connection;
+db.on("error", (error) => console.error(error));
+db.once("open", () => console.log("Connected to Mongoose"));
+
+// using routes
+app.use("/", indexRouter);
 
 app.get("/products", (req, res) => {
   const items = [
