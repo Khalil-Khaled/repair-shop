@@ -14,10 +14,11 @@ const PORT = process.env.PORT || 8080;
 app.use(morgan("tiny"));
 
 //bodyParser
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(bodyparser.urlencoded({ limit: "10mb", extended: true }));
 
 // routes
 const indexRouter = require("./routes/index");
+const offerRouter = require("./routes/offers");
 
 //view engine
 app.set("view engine", "ejs");
@@ -29,6 +30,9 @@ app.use(expressLayouts);
 app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
+
+// public folder
+app.use(express.static("public"));
 
 // mongoose
 const mongoose = require("mongoose");
@@ -42,6 +46,7 @@ db.once("open", () => console.log("Connected to Mongoose"));
 
 // using routes
 app.use("/", indexRouter);
+app.use("/offers", offerRouter);
 
 app.get("/products", (req, res) => {
   const items = [

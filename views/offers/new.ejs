@@ -1,0 +1,10 @@
+<h2>New Offer</h2>
+<form action="/offers" method="POST" enctype="multipart/form-data">
+  <% if(errorMessage != null && errorMessage != '') { %>
+  <div class="alert alert-danger"><%= errorMessage %></div>
+  <% } %> <%- include('_form_fields') %>
+  <div class="container" style="float: right">
+    <a class="btn btn-danger" href="/offers">Cancel</a>
+    <button class="btn btn-primary" type="submit">Create</button>
+  </div>
+</form>
