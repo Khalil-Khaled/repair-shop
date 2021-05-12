@@ -1,5 +1,12 @@
 {
-  "watch": ["package.json", "nodemon.json", "views/", "server.js", "routes/"],
+  "watch": [
+    "package.json",
+    "nodemon.json",
+    "views/",
+    "server.js",
+    "routes/",
+    "models/"
+  ],
   "verbose": true,
   "ignore": ["*.test.js", "*.spec.js"]
 }

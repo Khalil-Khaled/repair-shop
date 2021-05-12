@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row form-group">
+    <label for="offer-name" class="col-md-3"> Name</label>
+    <input
+      id="offer-name"
+      type="text"
+      name="name"
+      value="<%= offer.name %>"
+      class="col-md-3 form-control"
+    />
+  </div>
+  <div class="row form-group">
+    <label for="offer-price" class="col-md-3"> Price</label>
+    <input
+      class="col-md-3 form-control"
+      id="offer-price"
+      type="number"
+      name="price"
+      min="1"
+      value="<%= offer.price %>"
+    />
+  </div>
+  <div class="row form-group">
+    <label for="offer-discount" class="col-md-3">Discount</label>
+    <input
+      id="offer-discount"
+      type="number"
+      name="discount"
+      min="0"
+      value="<%= offer.discount %>"
+      class="col-md-3 form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="offer-image" class="col-md-3">Image</label>
+    <input id="offer-image" type="file" name="image" class="filepond" />
+  </div>
+  <div class="row form-group">
+    <label for="offer-issueDate" class="col-md-3">Issue Date</label>
+    <input
+      id="offer-issueDate"
+      type="date"
+      name="issueDate"
+      value="<%= offer.issueDate == null ? '' : offer.issueDate.toISOString().split('T')[0] %>"
+      class="col-md-3 form-control"
+    />
+  </div>
+  <div class="row form-group">
+    <label for="offer-expirationDate" class="col-md-3">Expiration Date</label>
+    <input
+      id="offer-expirationDate"
+      type="date"
+      name="expirationDate"
+      value="<%= offer.expirationDate == null ? '' : offer.expirationDate.toISOString().split('T')[0] %>"
+      class="col-md-3 form-control"
+    />
+  </div>
+</div>

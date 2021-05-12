@@ -1,0 +1,47 @@
+<section class="section-category">
+  <div class="white-backgr">
+    <h2>Search Offers</h2>
+    <form action="/offers" method="GET">
+      <div>
+        <label>Name</label>
+        <input
+          type="text"
+          name="name"
+          value="<%= searchOptions.name %>"
+          class="form-control"
+        />
+      </div>
+      <div>
+        <label>Issued After</label>
+        <input
+          type="date"
+          name="issuedAfter"
+          value="<%= searchOptions.issuedAfter %>"
+          class="form-control"
+        />
+      </div>
+      <div>
+        <label>Issued Before</label>
+        <input
+          type="date"
+          name="issuedBefore"
+          value="<%= searchOptions.issuedBefore %>"
+          class="form-control"
+        />
+      </div>
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <a class="btn btn-primary" href="/offers/new">Create</a>
+    <h1>All Offers</h1>
+    <% offers.forEach(offer => { %>
+    <img
+      alt="<%= offer.name %>"
+      height="150"
+      width="100"
+      src="<%= offer.offerImagePath %>"
+    />
+    <div>Name : <%= offer.name %></div>
+    <div>Price : <%= offer.price %></div>
+    <% }) %>
+  </div>
+</section>
