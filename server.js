@@ -81,10 +81,6 @@ app.get("/products", (req, res) => {
   res.render("product/product-list", { items });
 });
 
-app.get("/offers", (req, res) => {
-  res.render("offer/offers");
-});
-
 app.listen(PORT, () => {
   console.log("server is running on " + PORT);
 });

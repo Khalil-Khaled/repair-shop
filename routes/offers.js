@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
   let searchOptions = {};
   if (req.query.name != null && req.query.name !== "") {
     searchOptions.name = new RegExp(req.query.name, "i");
+    query = query.where("name", req.query.name);
   }
   if (req.query.issuedBefore != null && req.query.issuedBefore != "") {
     query = query.lte("issueDate", req.query.issuedBefore);
