@@ -57,8 +57,13 @@ router.post("/", async (req, res) => {
 });
 
 // get offer by id
-router.get("/:id", (req, res) => {
-  res.send("Show Offer" + req.params.id);
+router.get("/:id", async (req, res) => {
+  try {
+    const offer = await Offer.findById(req.params.id);
+    res.render("offers/show", { offer: offer });
+  } catch {
+    res.redirect("/");
+  }
 });
 
 router.get("/:id/edit", async (req, res) => {

@@ -34,14 +34,16 @@
     <a class="btn btn-primary" href="/offers/new">Create</a>
     <h1>All Offers</h1>
     <% offers.forEach(offer => { %>
-    <img
-      alt="<%= offer.name %>"
-      height="150"
-      width="100"
-      src="<%= offer.offerImagePath %>"
-    />
+    <a href="/offers/<%= offer.id %>">
+      <img
+        alt="<%= offer.name %>"
+        height="150"
+        width="100"
+        src="<%= offer.offerImagePath %>"
+      />
+    </a>
     <div>Name : <%= offer.name %></div>
-    <div>Price : <%= offer.price %></div>
+    <div>Price : <%= offer.discount %></div>
     <a style="color: black" href="/offers/<%= offer.id %>">View</a>
     <a style="color: black" href="/offers/<%= offer.id %>/edit">Edit</a>
     <form method="POST" action="/offers/<%= offer.id %>?_method=DELETE">
