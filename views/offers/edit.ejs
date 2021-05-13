@@ -1,0 +1,10 @@
+<h2>Edit Offer</h2>
+<form action="/offers/<%= offer.id %>?_method=PUT" method="POST">
+  <% if(errorMessage != null && errorMessage != '') { %>
+  <div class="alert alert-danger"><%= errorMessage %></div>
+  <% } %> <%- include('_form_fields') %>
+  <div class="container" style="float: right">
+    <a class="btn btn-danger" href="/offers/<%= offer.id %>">Cancel</a>
+    <button class="btn btn-primary" type="submit">Update</button>
+  </div>
+</form>

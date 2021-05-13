@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const bodyparser = require("body-parser");
 const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
+const methodOverride = require("method-override");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.set("layout", "layouts/layout");
 app.use(expressLayouts);
+app.use(methodOverride("_method"));
 
 //load assets
 app.use("/css", express.static(path.resolve(__dirname, "assets/css")));

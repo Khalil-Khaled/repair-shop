@@ -46,8 +46,7 @@ router.post("/", async (req, res) => {
   console.log(offer);
   try {
     const newOffer = await offer.save();
-    //res.redirect(`offers/${newOffer.id}`);
-    res.redirect("offers");
+    res.redirect(`offers/${newOffer.id}`);
   } catch (err) {
     console.log(err);
     res.render("offers/new", {
@@ -57,6 +56,74 @@ router.post("/", async (req, res) => {
   }
 });
 
+// get offer by id
+router.get("/:id", (req, res) => {
+  res.send("Show Offer" + req.params.id);
+});
+
+router.get("/:id/edit", async (req, res) => {
+  try {
+    const offer = await Offer.findById(req.params.id);
+    console.log(offer.name);
+    res.render("offers/edit", {
+      offer: offer,
+      errorMessage: "",
+    });
+  } catch {
+    res.redirect("/offers");
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  let offer;
+  console.log(req.body.image);
+  try {
+    offer = await Offer.findById(req.params.id);
+    if (req.body.name != null && req.body.name != "")
+      offer.name = req.body.name;
+    if (req.body.price != null && req.body.price != "")
+      offer.price = req.body.price;
+    if (req.body.discount != null && req.body.discount != "")
+      offer.discount = req.body.discount;
+    if (req.body.issueDate != null && req.body.issueDate != "")
+      offer.issueDate = new Date(req.body.issueDate);
+    if (req.body.expirationDate != null && req.body.expirationDate != "")
+      offer.expirationDate = new Date(req.body.expirationDate);
+    if (req.body.image != null && req.body.image != "")
+      saveImage(offer, req.body.image);
+    await offer.save();
+    res.redirect(`/offers/${offer.id}`);
+  } catch (err) {
+    console.log(err);
+    if (offer == null) {
+      res.redirect("/");
+    } else {
+      res.render("offers/edit", {
+        offer: offer,
+        errorMessage: "Error Updating the offer",
+      });
+    }
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  let offer;
+  console.log(req.body.image);
+  try {
+    offer = await Offer.findById(req.params.id);
+    await offer.remove();
+    res.redirect(`/offers`);
+  } catch (err) {
+    console.log(err);
+    if (offer == null) {
+      res.redirect("/");
+    } else {
+      res.redirect(`offers/${offer.id}`);
+    }
+  }
+});
+
+// save image function
 function saveImage(offer, imageEncoded) {
   if (imageEncoded == null) return;
   const image = JSON.parse(imageEncoded);
