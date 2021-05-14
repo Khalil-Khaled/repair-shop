@@ -1,54 +1,99 @@
-<section class="section-category">
-  <div class="white-backgr">
-    <h2>Search Offers</h2>
-    <form action="/offers" method="GET">
-      <div>
-        <label>Name</label>
-        <input
-          type="text"
-          name="name"
-          value="<%= searchOptions.name %>"
-          class="form-control"
-        />
-      </div>
-      <div>
-        <label>Issued After</label>
-        <input
-          type="date"
-          name="issuedAfter"
-          value="<%= searchOptions.issuedAfter %>"
-          class="form-control"
-        />
-      </div>
-      <div>
-        <label>Issued Before</label>
-        <input
-          type="date"
-          name="issuedBefore"
-          value="<%= searchOptions.issuedBefore %>"
-          class="form-control"
-        />
-      </div>
-      <button class="btn btn-primary" type="submit">Search</button>
-    </form>
-    <a class="btn btn-primary" href="/offers/new">Create</a>
-    <h1>All Offers</h1>
-    <% offers.forEach(offer => { %>
-    <a href="/offers/<%= offer.id %>">
-      <img
-        alt="<%= offer.name %>"
-        height="150"
-        width="100"
-        src="<%= offer.offerImagePath %>"
+<div class="container">
+  <h2 style="text-align: center">Search Offers</h2>
+  <form
+    action="/offers"
+    method="GET"
+    style="display: flex; align-items: center; flex-direction: column"
+  >
+    <div style="width: 65%">
+      <label for="name">Name</label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        value="<%= searchOptions.name %>"
+        class="form-control"
       />
-    </a>
-    <div>Name : <%= offer.name %></div>
-    <div>Price : <%= offer.discount %></div>
-    <a style="color: black" href="/offers/<%= offer.id %>">View</a>
-    <a style="color: black" href="/offers/<%= offer.id %>/edit">Edit</a>
-    <form method="POST" action="/offers/<%= offer.id %>?_method=DELETE">
-      <button type="submit" class="btn btn-danger">Delete</button>
-    </form>
-    <% }) %>
+    </div>
+    <div style="width: 65%">
+      <label for="issueDateAfter">Issued After</label>
+      <input
+        id="issueDateAfter"
+        type="date"
+        name="issuedAfter"
+        value="<%= searchOptions.issuedAfter %>"
+        class="form-control"
+      />
+    </div>
+    <div style="width: 65%">
+      <label for="issueDateBefore">Issued Before</label>
+      <input
+        id="issueDateBefore"
+        type="date"
+        name="issuedBefore"
+        value="<%= searchOptions.issuedBefore %>"
+        class="form-control"
+      />
+    </div>
+    <button class="btn btn-primary" type="submit" style="margin-top: 4px">
+      Search
+    </button>
+  </form>
+  <div
+    style="display: flex; align-items: center; justify-content: space-between"
+  >
+    <h1>Recently Added Offers</h1>
+    <a class="btn btn-danger" href="/offers/new"><i class="fas fa-plus"></i></a>
   </div>
-</section>
+
+  <% if(offers.length > 0) {%>
+  <table class="table" style="border: 1px solid gray">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Dicsount</th>
+        <th>Issue Date</th>
+        <th>Expiration Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i = 0; i < offers.length; i++) { %>
+      <tr data-href="/offers/<%= offers[i].id %>">
+        <td><%= offers[i].name %></td>
+        <td><%= offers[i].price %></td>
+        <td><%= offers[i].discount %></td>
+        <td><%= offers[i].issueDate.toDateString() %></td>
+        <td><%= offers[i].expirationDate.toDateString() %></td>
+        <td>
+          <span
+            class="text-gradient"
+            style="display: flex; position: absolute; font-size: 1.2rem"
+          >
+            <a style="color: black" href="/offers/<%= offers[i].id %>/edit"
+              ><i class="fas fa-pencil-alt"></i
+            ></a>
+            <form
+              method="POST"
+              action="/offers/<%= offers[i].id %>?_method=DELETE"
+            >
+              <button
+                type="submit"
+                class="fas fa-trash-alt"
+                style="background: none; border: none"
+              ></button>
+            </form>
+          </span>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <% }else{ %>
+  <br />
+  <div class="alert alert-warning" style="padding: 10px">
+    No Offers found with this criteria
+  </div>
+  <% } %>
+</div>

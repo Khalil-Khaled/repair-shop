@@ -2,14 +2,16 @@ const express = require("express");
 const router = express.Router();
 const Offer = require("../models/offer");
 const imageMimeTypes = ["image/jpeg", "image/png"];
+const mongoose = require("mongoose");
+const { ItemDB } = require("../models/item");
 
 // All offers route
 router.get("/", async (req, res) => {
-  let query = Offer.find();
+  let query = Offer.find().populate("offerItems").populate("offerFreeItems");
   let searchOptions = {};
   if (req.query.name != null && req.query.name !== "") {
     searchOptions.name = new RegExp(req.query.name, "i");
-    query = query.where("name", req.query.name);
+    query = query.where("name", searchOptions.name);
   }
   if (req.query.issuedBefore != null && req.query.issuedBefore != "") {
     query = query.lte("issueDate", req.query.issuedBefore);
@@ -19,6 +21,7 @@ router.get("/", async (req, res) => {
   }
   try {
     const offers = await query.exec();
+    console.log(offers);
     res.render("offers/index", { offers: offers, searchOptions: req.query });
   } catch {
     res.redirect("/");
@@ -26,11 +29,20 @@ router.get("/", async (req, res) => {
 });
 
 // new offer route
-router.get("/new", (req, res) => {
-  res.render("offers/new", {
-    offer: new Offer(),
-    errorMessage: "",
-  });
+router.get("/new", async (req, res) => {
+  try {
+    const items = await ItemDB.find();
+    // console.log(items);
+    res.render("offers/new", {
+      offer: new Offer(),
+      errorMessage: "",
+      items: items,
+      offerFreeItems: "",
+      offerItems: "",
+    });
+  } catch {
+    console.log("error while retrieving items");
+  }
 });
 
 // create offer route
@@ -41,9 +53,12 @@ router.post("/", async (req, res) => {
     discount: req.body.discount,
     issueDate: new Date(req.body.issueDate),
     expirationDate: new Date(req.body.expirationDate),
+    offerItems: req.body.items,
+    offerFreeItems: req.body.freeItems,
   });
+  //console.log(items);
   saveImage(offer, req.body.image);
-  console.log(offer);
+  // console.log(offer);
   try {
     const newOffer = await offer.save();
     res.redirect(`offers/${newOffer.id}`);
@@ -68,11 +83,16 @@ router.get("/:id", async (req, res) => {
 
 router.get("/:id/edit", async (req, res) => {
   try {
-    const offer = await Offer.findById(req.params.id);
-    console.log(offer.name);
+    const items = await ItemDB.find();
+    const offer = await Offer.findById(req.params.id)
+      .populate("offerItems")
+      .populate("offerFreeItems");
     res.render("offers/edit", {
       offer: offer,
       errorMessage: "",
+      offerItems: offer.offerItems.map((item) => item.id),
+      offerFreeItems: offer.offerFreeItems.map((item) => item.id),
+      items: items,
     });
   } catch {
     res.redirect("/offers");
@@ -96,6 +116,9 @@ router.put("/:id", async (req, res) => {
       offer.expirationDate = new Date(req.body.expirationDate);
     if (req.body.image != null && req.body.image != "")
       saveImage(offer, req.body.image);
+    if (req.body.items.length > 0) offer.offerItems = req.body.items;
+    if (req.body.freeItems.length > 0)
+      offer.offerFreeItems = req.body.freeItems;
     await offer.save();
     res.redirect(`/offers/${offer.id}`);
   } catch (err) {

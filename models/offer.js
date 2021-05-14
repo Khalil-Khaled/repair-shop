@@ -30,6 +30,20 @@ const offerSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  offerItems: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "item",
+      required: true,
+    },
+  ],
+  offerFreeItems: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "item",
+      required: false,
+    },
+  ],
 });
 
 offerSchema.virtual("offerImagePath").get(function () {

@@ -31,6 +31,27 @@
       class="col-md-3 form-control"
     />
   </div>
+  <div class="row form-group">
+    <label for="items" class="col-md-3"> Items </label>
+    <select name="items" id="items" multiple>
+      <% for( let i = 0; i < items.length; i++ ) { %> <%
+      if(offerItems.includes(items[i].id)) { %>
+      <option selected value="<%=items[i].id%>"><%=items[i].name%></option>
+      <% } else { %>
+      <option value="<%=items[i].id%>"><%=items[i].name%></option>
+      <% } %> <% } %>
+    </select>
+  </div>
+  <div class="row form-group">
+    <label for="freeItems" class="col-md-3"> Free Items </label>
+    <select name="freeItems" id="freeItems" multiple>
+      <% for( let i = 0; i < items.length; i++ ) { %>
+      <option <% if(offerFreeItems.includes(items[i].id)) { %>
+        selected <% } %> value="<%=items[i].id%>"><%=items[i].name%>
+      </option>
+      <% } %>
+    </select>
+  </div>
   <div class="form-group">
     <label for="offer-image" class="col-md-3">Image</label>
     <input id="offer-image" type="file" name="image" class="filepond" />
