@@ -1,0 +1,15 @@
+<h2><%= offer.name %></h2>
+<img
+  src="<%= offer.offerImagePath %>"
+  alt="<%= offer.name %>"
+  height="150"
+  width="100"
+/>
+<div>Price : <%= offer.price %></div>
+<div>Discount : <%= offer.discount %></div>
+<div>Issue Date : <%= offer.issueDate.toDateString() %></div>
+<div>Expiration Date : <%= offer.expirationDate.toDateString() %></div>
+<a style="color: black" href="/offers/<%= offer.id %>/edit">Edit</a>
+<form method="POST" action="/offers/<%= offer.id %>?_method=DELETE">
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>
