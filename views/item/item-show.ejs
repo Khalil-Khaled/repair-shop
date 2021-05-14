@@ -1,0 +1,15 @@
+<img
+  alt="<%= item.name %>"
+  height="150"
+  width="100"
+  src="<%= item.itemImagePath %>"
+/>
+<div>Name : <%= item.name %></div>
+<div>Price : <%= item.price %></div>
+<div>quantity : <%= item.quantity %></div>
+<div>category : <%= item.category %></div>
+<div>discount : <%= item.discount %></div>
+<% if (item.compatibility) item.compatibility.forEach(car => { %>
+<p><%= car %></p>
+<% }) %>
+<button><a href=""></a></button>

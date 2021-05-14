@@ -16,11 +16,11 @@ const offerSchema = new mongoose.Schema({
   },
   offerImage: {
     type: Buffer,
-    required: true,
+    required: false,
   },
   offerImageType: {
     type: String,
-    required: true,
+    required: false,
   },
   issueDate: {
     type: Date,

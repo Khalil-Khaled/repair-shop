@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="row form-group">
+    <label for="item-name" class="col-md-3"> Name</label>
+    <input
+      id="item-name"
+      type="text"
+      name="name"
+      value="<%= item.name %>"
+      class="col-md-3 form-control"
+    />
+  </div>
+  <div class="row form-group">
+    <label for="item-price" class="col-md-3"> Price</label>
+    <input
+      class="col-md-3 form-control"
+      id="item-price"
+      type="number"
+      name="price"
+      min="1"
+      value="<%= item.price %>"
+    />
+  </div>
+  <div class="row form-group">
+    <label for="item-quantity" class="col-md-3"> quantity</label>
+    <input
+      class="col-md-3 form-control"
+      id="item-quantity"
+      type="number"
+      name="quantity"
+      min="1"
+      value="<%= item.quantity %>"
+    />
+  </div>
+  <div class="row form-group">
+    <label for="compatibility" class="col-md-3"> Compatibility</label>
+    <select name="compatibility" id="compatibility" multiple>
+      <% for( let i = 0; i < carBrands.length; i++ ) { %> <%
+      if(item.compatibility.includes(carBrands[i])) { %>
+      <option selected value="<%=carBrands[i]%>"><%=carBrands[i]%></option>
+      <% } else { %>
+      <option value="<%=carBrands[i]%>"><%=carBrands[i]%></option>
+      <% }} %>
+    </select>
+  </div>
+  <div class="row form-group">
+    <label for="item-category" class="col-md-3"> Category</label>
+    <select name="category" id="category">
+      <% for( let i = 0; i < categoryEnum.length; i++ ) { %>
+      <option value="<%=categoryEnum[i]%>"><%=categoryEnum[i]%></option>
+      <% } %>
+    </select>
+  </div>
+  <div class="row form-group">
+    <label for="item-discount" class="col-md-3">Discount</label>
+    <input
+      id="item-discount"
+      type="number"
+      name="discount"
+      min="0"
+      value="<%= item.discount %>"
+      class="col-md-3 form-control"
+    />
+  </div>
+  <div class="form-group">
+    <label for="item-image" class="col-md-3">Image</label>
+    <input id="item-image" type="file" name="image" class="filepond" />
+  </div>
+</div>
