@@ -1,0 +1,8 @@
+<h2 style="text-align: center; margin: 2rem 0rem">Update Item</h2>
+<form action="/items/<%= item.id %>?_method=PUT" method="POST">
+  <%- include('_form_fields') %>
+  <div class="container" style="float: right">
+    <a class="btn btn-danger" href="/items/admin">Cancel</a>
+    <button class="btn btn-primary" type="submit">Update</button>
+  </div>
+</form>

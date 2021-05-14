@@ -1,7 +1,7 @@
 <div class="container">
-  <h2 style="text-align: center; margin: 2rem 0">Search Offers</h2>
+  <h2 style="text-align: center; margin: 2rem 0">Search items</h2>
   <form
-    action="/offers"
+    action="/items/admin"
     method="GET"
     style="display: flex; align-items: center; flex-direction: column"
   >
@@ -16,24 +16,33 @@
       />
     </div>
     <div style="width: 65%">
-      <label for="issueDateAfter">Issued After</label>
+      <label for="min">Min price</label>
       <input
-        id="issueDateAfter"
-        type="date"
-        name="issuedAfter"
-        value="<%= searchOptions.issuedAfter %>"
+        id="min"
+        type="number"
+        name="min"
+        value="<%= searchOptions.min%>"
         class="form-control"
       />
     </div>
     <div style="width: 65%">
-      <label for="issueDateBefore">Issued Before</label>
+      <label for="max">Max price</label>
       <input
-        id="issueDateBefore"
-        type="date"
-        name="issuedBefore"
-        value="<%= searchOptions.issuedBefore %>"
+        id="max"
+        type="number"
+        name="max"
+        value="<%= searchOptions.max%>"
         class="form-control"
       />
+    </div>
+    <div style="width: 65%">
+      <label for="category">Category</label>
+      <select name="category" id="category">
+        <option value="">select a category</option>
+        <% for( let i = 0; i < categoryEnum.length; i++ ) { %>
+        <option value="<%=categoryEnum[i]%>"><%=categoryEnum[i]%></option>
+        <% } %>
+      </select>
     </div>
     <button class="btn btn-primary" type="submit" style="margin-top: 4px">
       Search
@@ -42,41 +51,41 @@
   <div
     style="display: flex; align-items: center; justify-content: space-between"
   >
-    <h1>Recently Added Offers</h1>
-    <a class="btn btn-danger" href="/offers/new"><i class="fas fa-plus"></i></a>
+    <h1>All Items</h1>
+    <a class="btn btn-danger" href="/items/create"
+      ><i class="fas fa-plus"></i
+    ></a>
   </div>
 
-  <% if(offers.length > 0) {%>
+  <% if(items.length > 0) {%>
   <table class="table" style="border: 1px solid gray">
     <thead class="thead-dark">
       <tr>
         <th>Name</th>
         <th>Price</th>
-        <th>Dicsount</th>
-        <th>Issue Date</th>
-        <th>Expiration Date</th>
+        <th>Category</th>
+        <th>Discount</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <% for(var i = 0; i < offers.length; i++) { %>
-      <tr data-href="/offers/<%= offers[i].id %>">
-        <td><%= offers[i].name %></td>
-        <td><%= offers[i].price %></td>
-        <td><%= offers[i].discount %></td>
-        <td><%= offers[i].issueDate.toDateString() %></td>
-        <td><%= offers[i].expirationDate.toDateString() %></td>
+      <% for(var i = 0; i < items.length; i++) { %>
+      <tr data-href="/items/<%= items[i].id %>">
+        <td><%= items[i].name %></td>
+        <td><%= items[i].price %></td>
+        <td><%= items[i].category %></td>
+        <td><%= items[i].discount %></td>
         <td>
           <span
             class="text-gradient"
             style="display: flex; position: absolute; font-size: 1.2rem"
           >
-            <a style="color: black" href="/offers/<%= offers[i].id %>/edit"
+            <a style="color: black" href="/items/update/<%= items[i].id %>"
               ><i class="fas fa-pencil-alt"></i
             ></a>
             <form
               method="POST"
-              action="/offers/<%= offers[i].id %>?_method=DELETE"
+              action="/items/<%= items[i].id %>?_method=DELETE"
             >
               <button
                 type="submit"
@@ -93,7 +102,7 @@
   <% }else{ %>
   <br />
   <div class="alert alert-warning" style="padding: 10px">
-    No Offers found with this criteria
+    No items found with this criteria
   </div>
   <% } %>
 </div>

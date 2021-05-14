@@ -20,6 +20,7 @@ app.use(bodyparser.urlencoded({ limit: "10mb", extended: true }));
 // routes
 const indexRouter = require("./routes/index");
 const offerRouter = require("./routes/offers");
+const itemsRouter = require("./routes/items-router");
 
 //view engine
 app.set("view engine", "ejs");
@@ -49,39 +50,7 @@ db.once("open", () => console.log("Connected to Mongoose"));
 // using routes
 app.use("/", indexRouter);
 app.use("/offers", offerRouter);
-
-app.get("/products", (req, res) => {
-  const items = [
-    {
-      id: 1,
-      name: "car part 1",
-      price: 90,
-      quantity: 50,
-      type: "car part",
-      compatibility: ["BMW", "Mercedes"],
-      discount: 0,
-    },
-    {
-      id: 2,
-      name: "car part 2",
-      price: 40,
-      quantity: 4,
-      type: "car part",
-      compatibility: ["BMW", "Mercedes"],
-      discount: 0,
-    },
-    {
-      id: 3,
-      name: "accessory 1",
-      price: 10,
-      quantity: 100,
-      type: "accessory",
-      compatibility: ["ALL"],
-      discount: 0,
-    },
-  ];
-  res.render("product/product-list", { items });
-});
+app.use("/items", itemsRouter);
 
 app.listen(PORT, () => {
   console.log("server is running on " + PORT);

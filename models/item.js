@@ -87,11 +87,11 @@ const itemSchema = new mongoose.Schema({
   },
   itemImage: {
     type: Buffer,
-    required: true,
+    required: false,
   },
   itemImageType: {
     type: String,
-    required: true,
+    required: false,
   },
   compatibility: [
     {
