@@ -23,6 +23,7 @@ const offerRouter = require("./routes/offers");
 const itemsRouter = require("./routes/items-router");
 const usersRouter = require("./routes/users");
 const staffRouter = require("./routes/staffs");
+const interventionRouter = require("./routes/Interventions");
 
 //view engine
 app.set("view engine", "ejs");
@@ -38,6 +39,8 @@ app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
 // public folder
 app.use(express.static("public"));
+
+app.use(methodOverride("_method"));
 
 // mongoose
 const mongoose = require("mongoose");
@@ -55,6 +58,7 @@ app.use("/offers", offerRouter);
 app.use("/items", itemsRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/staff", staffRouter);
+app.use("/interventions", interventionRouter);
 
 app.listen(PORT, () => {
   console.log("server is running on " + PORT);
