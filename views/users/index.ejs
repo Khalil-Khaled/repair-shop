@@ -1,0 +1,60 @@
+<!--Main section-->
+<link rel="stylesheet" href="/css/user_staff.css" />
+<main id="site-main">
+  <div class="container">
+    <div class="box-nav d-flex-justify-between">
+      <a style="color: blue;" href="/api/users/add" class="border-shadow">
+        <span class="text-gradient">New User<i class="fas fa-user"></i></span>
+      </a>
+    </div>
+
+    <!--form handling-->
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>CIN</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Phone number</th>
+          <th>@Email</th>
+          <th>Gender</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i=0; i<users.length; i++) { %>
+          <tr>
+            <td><%= users[i].cin %></td>
+            <td><%= users[i].first_name %></td>
+            <td><%= users[i].last_name %></td>
+            <td><%= users[i].phone_number %></td>
+            <td><%= users[i].email %></td>
+            <td><%= users[i].gender %></td>
+            <td><%= users[i].status %></td>
+
+            <td>
+              <a
+                href="/api/users/<%= users[i]._id %>"
+                class="btn border-shadow update"
+              >
+                <span class="text-gradient"
+                  ><i class="fas fa-pencil-alt"></i
+                ></span>
+              </a>
+              <form
+                method="POST"
+                action="/api/users/delete/<%= users[i]._id %>?_method=DELETE"
+              >
+                <button class="btn border-shadow delete" type="submit">
+                  Delete User
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </users.length;>
+      </tbody>
+    </table>
+  </div>
+</main>

@@ -21,6 +21,8 @@ app.use(bodyparser.urlencoded({ limit: "10mb", extended: true }));
 const indexRouter = require("./routes/index");
 const offerRouter = require("./routes/offers");
 const itemsRouter = require("./routes/items-router");
+const usersRouter = require("./routes/users");
+const staffRouter = require("./routes/staffs");
 
 //view engine
 app.set("view engine", "ejs");
@@ -51,6 +53,8 @@ db.once("open", () => console.log("Connected to Mongoose"));
 app.use("/", indexRouter);
 app.use("/offers", offerRouter);
 app.use("/items", itemsRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/staff", staffRouter);
 
 app.listen(PORT, () => {
   console.log("server is running on " + PORT);
