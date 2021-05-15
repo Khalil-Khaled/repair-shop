@@ -1,0 +1,63 @@
+<!--Main section-->
+<link rel="stylesheet" href="/css/user_staff.css" />
+<main id="site-main">
+  <div class="container">
+    <div class="box-nav d-flex-justify-between">
+      <a style="color: blue;" href="/api/staff/add" class="border-shadow">
+        <span class="text-gradient">New Staff<i class="fas fa-user"></i></span>
+      </a>
+    </div>
+
+    <!--form handling-->
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>CIN</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Phone number</th>
+          <th>@Email</th>
+          <th>Job</th>
+          <th>Gender</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i=0; i<staffs.length; i++) { %>
+          <tr>
+            <td><%= staffs[i].cin %></td>
+            <td><%= staffs[i].first_name %></td>
+            <td><%= staffs[i].last_name %></td>
+            <td><%= staffs[i].phone_number %></td>
+            <td><%= staffs[i].email %></td>
+            <td><%= staffs[i].job %></td>
+            <td><%= staffs[i].gender %></td>
+            <td><%= staffs[i].status %></td>
+
+            <td>
+              <a
+                href="/api/staff/<%= staffs[i]._id %>"
+                class="btn border-shadow update"
+              >
+                <span class="text-gradient"
+                  ><i class="fas fa-pencil-alt"></i
+                ></span>
+              </a>
+              <form
+                method="POST"
+                action="/api/staff/delete/<%= staffs[i]._id %>?_method=DELETE"
+              >
+                <button class="btn border-shadow delete" type="submit">
+                  Delete User
+                </button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </staffs.length;>
+      </tbody>
+    </table>
+  </div>
+</main>

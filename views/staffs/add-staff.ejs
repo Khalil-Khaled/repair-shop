@@ -1,0 +1,91 @@
+<!--Main section-->
+<link rel="stylesheet" href="/css/user_staff.css" />
+<main id="site-main">
+  <div class="container">
+    <div class="box-nav d-flex-justify-between">
+      <div class="filter">
+        <a href="/"><i class="fas fa-users"></i> All Staff </a>
+      </div>
+    </div>
+    <div class="form-title text-center">
+      <h2 class="text-dark">New Staff Member</h2>
+      <span class="text-lightt"
+        >Use the form bellow to create a new Staff Member</span
+      >
+    </div>
+
+    <!--add user form-->
+    <form action="/api/staff/add" method="POST" id="add_user">
+      <div class="new_user">
+        <div class="form-group">
+          <label for="name" class="text-lightt">CIN</label>
+          <input type="text" name="cin" value="" placeholder="0527578578587" />
+        </div>
+
+        <div class="form-group">
+          <label for="name" class="text-lightt">First name</label>
+          <input type="text" name="first_name" value="" placeholder="Mark " />
+        </div>
+
+        <div class="form-group">
+          <label for="name" class="text-lightt">Last name</label>
+          <input type="text" name="last_name" value="" placeholder=" Stoenis" />
+        </div>
+
+        <div class="form-group">
+          <label for="name" class="text-lightt">Phone number</label>
+          <input
+            type="text"
+            name="phone_number"
+            value=""
+            placeholder="28525555585885"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="Email" class="text-lightt">Email</label>
+          <input
+            type="text"
+            name="email"
+            value=""
+            placeholder="example@gmail.com"
+          />
+
+          <div class="form-group">
+            <label for="name" class="text-lightt">Job</label>
+            <input type="text" name="job" value="" placeholder="2852555558" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gender" class="text-lightt">Gender</label>
+          <div class="radio inline">
+            <input type="radio" id="radio-2" name="gender" value="Male" />
+            <label for="radio-2" class="radio-label">Male</label>
+          </div>
+          <div class="radio inline">
+            <input type="radio" id="radio-3" name="gender" value="Female" />
+            <label for="radio-3" class="radio-label">Female</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="gender" class="text-lightt">Status</label>
+          <div class="radio inline">
+            <input type="radio" id="radio-4" name="status" value="Active" />
+            <label for="radio-4" class="radio-label">Active</label>
+          </div>
+          <div class="radio inline">
+            <input type="radio" id="radio-5" name="status" value="Inactive" />
+            <label for="radio-5" class="radio-label">Inactive</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn text-dark update">Save</button>
+        </div>
+      </div>
+    </form>
+
+    <!--/add user form--->
+  </div>
+</main>
