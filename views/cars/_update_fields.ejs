@@ -1,0 +1,81 @@
+<div class="box-nav d-flex justify-between">
+    <div class="filter">
+      <a href="/cars"
+        ><i class="fas fa-angle-double-left"></i> All cars</a
+      >
+    </div>
+  </div>
+  <div class="container">
+    <div class="row form-group">
+      <label for="car-brand" class="col-md-3"> brand</label>
+      <input
+        id="car-brand"
+        type="text"
+        name="car"
+        value="<%= car.brand %>"
+        class="col-md-3 form-control"
+      />
+    </div>
+    <div class="row form-group">
+      <label for="car-model" class="col-md-3">
+        model</label
+      >
+      <input
+        id="car-model"
+        type="text"
+        name="model"
+        value="<%= car.model %>"
+        class="col-md-3 form-control"
+
+      />
+    </div>
+    <div class="row form-group">
+      <label for="car-platesNumber" class="col-md-3"> platesNumber</label>
+      <input
+        id="car-platesNumber"
+        type="text"
+        name="platesNumber"
+        value="<%= car.platesNumber %>"
+        class="col-md-3 form-control"
+      >
+    </input>
+    </div>
+    <div class="row form-group">
+      <label for="car-year" class="col-md-3"> year</label>
+      <input
+        id="car-year"
+        type="text"
+        name="year"
+        value="<%= car.year %>"
+        class="col-md-3 form-control"
+        
+      />
+    </div>
+    <div class="row form-group">
+      <label for="car-color" class="col-md-3"> color</label>
+      <input
+        id="car-color"
+        type="text"
+        name="color"
+        value="<%= car.color %>"
+        class="col-md-3 form-control"
+        
+      />
+    </div>
+    <div class="row form-group">
+      <label for="car-carStatus" class="col-md-3"> carStatus</label>
+      <select id="car-carStatus" name="carStatus" class="col-md-3 form-control">
+          <option value="Completely broken">
+            Completely broken
+          </option>
+          <option value="works but need some fixing">
+            works but need some fixing
+            <option value="Need a checkup">
+            Need a checkup
+            <option value="fixed">
+              fixed
+          </option>
+      </select>
+    </div>
+    </div>
+  </div>
