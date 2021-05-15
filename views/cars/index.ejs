@@ -1,0 +1,77 @@
+<main id="site-main">
+    <div class="container">
+      <div class="box-nav d-flex-justify-between">
+        <a href="/cars/new" class="border-shadow">
+          <span class="text-gradient"
+            >new Car <i class="fas fa-plus"></i>
+          </span>
+        </a>
+      </div>
+      <h2>Search cars</h2>
+      <form action="/cars" method="GET">
+        <div>
+          <label>brand</label>
+          <input
+            type="text"
+            name="brand"
+            value="<%= searchOptions.brand %>"
+            class="form-control"
+            placeholder="enter brand"
+          />
+        </div>
+        <div>
+          <label>model</label>
+          <input
+            type="text"
+            name="model"
+            value="<%= searchOptions.model %>"
+            class="form-control"
+            placeholder="enter model"
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+      <!-- form handling -->
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>brand</th>
+            <th>model</th>
+            <th>platesNumber</th>
+            <th>year</th>
+            <th>color</th>
+            <th>carStatus</th>
+          </tr>
+        </thead>
+        <tbody>    
+          <% for(var i = 0; i < cars.length; i++) { %>
+          <tr>
+            <td><%= cars[i].brand %></td>
+            <td><%= cars[i].model %></td>
+            <td><%= cars[i].platesNumber %></td>
+            <td><%= cars[i].year %></td>
+            <td><%= cars[i].color %></td>
+            <td><%= cars[i].carStatus %></td>
+            <td>
+              <span class="text-gradient"
+                  >
+              <a style="color: black" href="/cars/<%= cars[i].id %>"><i class="fas fa-pencil-alt"></i
+                ></a>
+               
+              
+              <form
+                method="POST"
+                action="/cars/delete/<%= cars[i].id %>?_method=DELETE"
+              >
+                <button type="submit" class="btn btn-danger">Delete</button>
+                
+              </form>
+            </span>
+            </td>
+          </tr>
+          <% } %>
+        </a>
+        </tbody>
+      </table>
+    </div>
+  </main>
