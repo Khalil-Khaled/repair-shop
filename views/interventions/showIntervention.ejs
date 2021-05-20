@@ -1,0 +1,10 @@
+<h2>Intervention</h2>
+<form
+  action="/interventions/edit/<%=intervention.id%>?_method=PUT"
+  method="POST"
+>
+  <%- include('_show_fields.ejs') %>
+  <div class="container" style="float: right">
+    <a class="btn btn-danger" href="/interventions">OK</a>
+  </div>
+</form>

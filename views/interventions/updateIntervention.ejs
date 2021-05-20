@@ -1,0 +1,11 @@
+<h2>Update Intervention</h2>
+<form
+  action="/interventions/edit/<%=intervention.id%>?_method=PUT"
+  method="POST"
+>
+  <%- include('_update_fields.ejs') %>
+  <div class="container" style="float: right">
+    <a class="btn btn-danger" href="/interventions">Cancel</a>
+    <button class="btn btn-primary" type="submit">Update</button>
+  </div>
+</form>
