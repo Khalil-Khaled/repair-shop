@@ -25,7 +25,7 @@ const usersRouter = require("./routes/users");
 const staffRouter = require("./routes/staffs");
 const interventionRouter = require("./routes/Interventions");
 const carRouter = require("./routes/cars");
-
+const shopRouter = require("./routes/shop");
 
 //view engine
 app.set("view engine", "ejs");
@@ -62,7 +62,7 @@ app.use("/api/users", usersRouter);
 app.use("/api/staff", staffRouter);
 app.use("/interventions", interventionRouter);
 app.use("/cars", carRouter);
-
+app.use("/shop", shopRouter);
 
 app.listen(PORT, () => {
   console.log("server is running on " + PORT);
