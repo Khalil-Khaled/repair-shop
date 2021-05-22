@@ -6,10 +6,10 @@
     <section>
       <div class="products-wrapper">
         <div class="group-title">
-          <h1>Category 1</h1>
+          <h1>Body Parts</h1>
         </div>
         <div class="products">
-          <% items.forEach(item => { %>
+          <% bodyParts.forEach(item => { %>
           <div class="product">
             <p><%= item.name %></p>
             <img
@@ -34,17 +34,81 @@
     <section>
       <div class="products-wrapper">
         <div class="group-title">
-          <h1>Featured Offers</h1>
+          <h1>Lights</h1>
         </div>
         <div class="products">
+          <% lights.forEach(item => { %>
           <div class="product">
-            <p>Bumpers & Components</p>
-            <img src="img/car parts/bumpers.jpg" alt="" />
+            <p><%= item.name %></p>
+            <img
+              src="<%= item.itemImagePath %>"
+              alt=""
+              width="150px"
+              height="150px"
+              style="object-fit: contain"
+            />
             <div class="product-price">
-              <p>25 TND</p>
+              <p><%= item.price %> TND</p>
               <button class="btn-sm btn-danger">Add to Cart</button>
             </div>
           </div>
+          <% }) %>
+        </div>
+        <div class="see-all">
+          <a href="">see all <i class="fas fa-chevron-right"></i></a>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="products-wrapper">
+        <div class="group-title">
+          <h1>Engines</h1>
+        </div>
+        <div class="products">
+          <% engines.forEach(item => { %>
+          <div class="product">
+            <p><%= item.name %></p>
+            <img
+              src="<%= item.itemImagePath %>"
+              alt=""
+              width="150px"
+              height="150px"
+              style="object-fit: contain"
+            />
+            <div class="product-price">
+              <p><%= item.price %> TND</p>
+              <button class="btn-sm btn-danger">Add to Cart</button>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <div class="see-all">
+          <a href="">see all <i class="fas fa-chevron-right"></i></a>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="products-wrapper">
+        <div class="group-title">
+          <h1>Accessories</h1>
+        </div>
+        <div class="products">
+          <% accessories.forEach(item => { %>
+          <div class="product">
+            <p><%= item.name %></p>
+            <img
+              src="<%= item.itemImagePath %>"
+              alt=""
+              width="150px"
+              height="150px"
+              style="object-fit: contain"
+            />
+            <div class="product-price">
+              <p><%= item.price %> TND</p>
+              <button class="btn-sm btn-danger">Add to Cart</button>
+            </div>
+          </div>
+          <% }) %>
         </div>
         <div class="see-all">
           <a href="">see all <i class="fas fa-chevron-right"></i></a>
@@ -74,7 +138,12 @@
             />
             <div class="product-price">
               <p><%= offer.price %> TND</p>
-              <button class="btn-sm btn-danger">Add to Cart</button>
+              <form method="POST" action="shop/addOfferToCart">
+                <input type="hidden" name="id" value="<%= offer.id %>" />
+                <button type="submit" class="btn-sm btn-danger">
+                  Add to Cart
+                </button>
+              </form>
             </div>
           </div>
           <% }) %>
