@@ -24,11 +24,11 @@ const offerSchema = new mongoose.Schema({
   },
   issueDate: {
     type: Date,
-    required: true,
+    required: false,
   },
   expirationDate: {
     type: Date,
-    required: true,
+    required: false,
   },
   offerItems: [
     {
