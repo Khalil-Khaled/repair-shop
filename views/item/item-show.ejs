@@ -2,6 +2,7 @@
   alt="<%= item.name %>"
   height="150"
   width="100"
+  style="object-fit: contain"
   src="<%= item.itemImagePath %>"
 />
 <div>Name : <%= item.name %></div>
@@ -12,4 +13,6 @@
 <% if (item.compatibility) item.compatibility.forEach(car => { %>
 <p><%= car %></p>
 <% }) %>
-<button><a href=""></a></button>
+<form method="POST" action="/items/<%= item.id %>?_method=DELETE">
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>

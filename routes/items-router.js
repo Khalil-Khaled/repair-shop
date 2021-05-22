@@ -5,62 +5,6 @@ const imageMimeTypes = ["image/jpeg", "image/png"];
 const { carBrands } = require("../models/item");
 const { categoryEnum } = require("../models/item");
 
-//products page
-router.get("/", (req, res) => {
-  const items = [
-    {
-      id: 1,
-      name: "car part 1",
-      price: 90,
-      quantity: 50,
-      type: "car part",
-      compatibility: ["BMW", "Mercedes"],
-      discount: 0,
-    },
-    {
-      id: 2,
-      name: "car part 2",
-      price: 40,
-      quantity: 4,
-      type: "car part",
-      compatibility: ["BMW", "Mercedes"],
-      discount: 0,
-    },
-    {
-      id: 3,
-      name: "accessory 1",
-      price: 10,
-      quantity: 100,
-      type: "accessory",
-      compatibility: ["ALL"],
-      discount: 0,
-    },
-  ];
-  res.render("item/item-list", { items });
-});
-
-//create item page
-router.get("/create", (req, res) => {
-  res.render("item/add-item", { item: new ItemDB(), carBrands, categoryEnum });
-});
-
-// update page
-router.get("/update/:id", async (req, res) => {
-  let item = await ItemDB.findById(req.params.id);
-  res.render("item/update-item", {
-    item: item,
-    carBrands,
-    categoryEnum,
-  });
-});
-
-//show item page
-router.get("/show/:id", async (req, res) => {
-  const item = await ItemDB.findById(req.params.id);
-  console.log(item);
-  res.render("item/item-show", { item });
-});
-
 //admin get items page
 router.get("/admin", async (req, res) => {
   let query = ItemDB.find();
@@ -88,6 +32,28 @@ router.get("/admin", async (req, res) => {
     categoryEnum,
     searchOptions: req.query,
   });
+});
+
+//create item page
+router.get("/create", (req, res) => {
+  res.render("item/add-item", { item: new ItemDB(), carBrands, categoryEnum });
+});
+
+// update page
+router.get("/update/:id", async (req, res) => {
+  let item = await ItemDB.findById(req.params.id);
+  res.render("item/update-item", {
+    item: item,
+    carBrands,
+    categoryEnum,
+  });
+});
+
+//show item page
+router.get("/:id", async (req, res) => {
+  const item = await ItemDB.findById(req.params.id);
+  console.log(item);
+  res.render("item/item-show", { item });
 });
 
 // create item

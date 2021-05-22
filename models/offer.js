@@ -12,7 +12,7 @@ const offerSchema = new mongoose.Schema({
   },
   discount: {
     type: Number,
-    required: true,
+    required: false,
   },
   offerImage: {
     type: Buffer,
@@ -44,6 +44,11 @@ const offerSchema = new mongoose.Schema({
       required: false,
     },
   ],
+  cartCount: {
+    type: Number,
+    required: false,
+    default: 0,
+  },
 });
 
 offerSchema.virtual("offerImagePath").get(function () {

@@ -13,18 +13,25 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  gap: 1em;
+  gap: 2em;
   padding: 2em;
   justify-content: center;
 }
 .product {
   text-align: center;
   background-color: #ffffff;
-  width: 10em;
-  height: 12em;
+  width: 12em;
+  height: 16em;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.product-price {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
   align-items: center;
 }
 
@@ -71,4 +78,5 @@
   flex-direction: column;
   align-items: center;
   gap: 5em;
+  width: 50%;
 }

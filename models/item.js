@@ -100,6 +100,10 @@ const itemSchema = new mongoose.Schema({
     },
   ],
   discount: Number,
+  cartCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 itemSchema.virtual("itemImagePath").get(function () {
