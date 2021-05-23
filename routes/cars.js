@@ -114,7 +114,7 @@ router.put("/edit/:id", async (req, res, next) => {
 });
 
 //delete
-router.post("/delete/:id", async (req, res) => {
+router.delete("/delete/:id", async (req, res) => {
   let car = await Car.findById(req.params.id);
 
   car

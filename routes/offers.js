@@ -94,7 +94,9 @@ router.post("/", async (req, res) => {
     offerFreeItems: req.body.freeItems,
   });
   //console.log(items);
-  saveImage(offer, req.body.image);
+  if (req.body.image) {
+    saveImage(offer, req.body.image);
+  }
   // console.log(offer);
   try {
     const newOffer = await offer.save();

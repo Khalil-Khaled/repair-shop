@@ -73,7 +73,13 @@ localStorage.setItem("cart", JSON.stringify(cart));
 app.use("*", (req, res, next) => {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const totalItems = cart.offers.length + cart.items.length;
+  let isConnected = false;
+  if (req.cookies.token) {
+    isConnected = true;
+  }
   res.locals.totalItems = totalItems;
+  res.locals.isConnected = isConnected;
+
   next();
 });
 app.use("/", indexRouter);
