@@ -115,7 +115,14 @@ router.get("/cart", async (req, res) => {
     dbItem.cartCount = singleItem.numInCart;
     cartItems.push(dbItem);
   }
-  res.render("shop/cart", { cartOffers, cartItems });
+  let total = 0;
+  cartOffers.forEach(
+    (selectedOffer) => (total += selectedOffer.cartCount * selectedOffer.price)
+  );
+  cartItems.forEach(
+    (selectedItem) => (total += selectedItem.cartCount * selectedItem.price)
+  );
+  res.render("shop/cart", { cartOffers, cartItems, total });
 });
 
 module.exports = router;
