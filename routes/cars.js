@@ -86,7 +86,7 @@ router.get("/edit/:id", async (req, res) => {
 });
 
 // update car
-router.post("/edit/:id", async (req, res, next) => {
+router.put("/edit/:id", async (req, res, next) => {
   let car = await Car.findById(req.params.id);
   if (req.body.brand != null && req.body.brand != "")
     car.brand = req.body.brand;

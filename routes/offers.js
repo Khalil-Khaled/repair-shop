@@ -4,6 +4,7 @@ const Offer = require("../models/offer");
 const imageMimeTypes = ["image/jpeg", "image/png"];
 const mongoose = require("mongoose");
 const { ItemDB } = require("../models/item");
+var LocalStorage = require("node-localstorage").LocalStorage;
 
 // All offers Postman Route
 router.get("/json", async (req, res) => {
@@ -30,6 +31,8 @@ router.get("/json", async (req, res) => {
 
 // All offers route
 router.get("/", async (req, res) => {
+  console.log("offer route");
+  console.log(localStorage.getItem("myFirstKey"));
   let query = Offer.find().populate("offerItems").populate("offerFreeItems");
   let searchOptions = {};
   if (req.query.name != null && req.query.name !== "") {

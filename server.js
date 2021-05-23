@@ -46,6 +46,7 @@ app.use(methodOverride("_method"));
 
 // mongoose
 const mongoose = require("mongoose");
+const { nextTick } = require("process");
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -54,7 +55,24 @@ const db = mongoose.connection;
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to Mongoose"));
 
+// Initializing cart local storage
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require("node-localstorage").LocalStorage;
+  localStorage = new LocalStorage("./scratch");
+}
+const cart = {
+  items: [],
+  offers: [],
+};
+localStorage.setItem("cart", JSON.stringify(cart));
+
 // using routes
+app.use("*", (req, res, next) => {
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  const totalItems = cart.offers.length + cart.items.length;
+  res.locals.totalItems = totalItems;
+  next();
+});
 app.use("/", indexRouter);
 app.use("/offers", offerRouter);
 app.use("/items", itemsRouter);
