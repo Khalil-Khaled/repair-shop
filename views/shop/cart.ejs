@@ -1,0 +1,46 @@
+<h1>Shopping Cart</h1>
+<% if(cartOffers.length > 0){ %>
+<h2>Offers :</h2>
+<table class="table" style="border: 1px solid gray">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i = 0; i < cartOffers.length; i++) { %>
+    <tr>
+      <td><%= cartOffers[i].name %></td>
+      <td><%= cartOffers[i].price %></td>
+      <td><%= cartOffers[i].cartCount %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+<% }else{ %>
+<h2>There are no offers in the cart !</h2>
+<% } %> <% if(cartItems.length > 0){ %>
+<h2>Items :</h2>
+<table class="table" style="border: 1px solid gray">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i = 0; i < cartItems.length; i++) { %>
+    <tr>
+      <td><%= cartItems[i].name %></td>
+      <td><%= cartItems[i].price %></td>
+      <td><%= cartItems[i].cartCount %></td>
+    </tr>
+    <% } %>
+  </tbody>
+</table>
+<% }else{ %>
+<h2>There are no items in the cart !</h2>
+<% } %>
