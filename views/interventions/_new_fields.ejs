@@ -1,12 +1,25 @@
 <div class="box-nav d-flex justify-between">
-  <div>
-    <a href="/interventions" style="color: black"
-      ><i style="color: black" class="fas fa-angle-double-left"></i> All
-      interventions</a
+  <div style="float: right">
+    <a href="/interventions"
+      ><i class="fas fa-angle-double-left"></i> All interventions</a
     >
   </div>
 </div>
 <div class="container">
+  <div class="row form-group">
+    <label for="intervention-car" class="col-md-3"> car</label>
+    <select
+      id="intervention-car"
+      name="car"
+      class="col-md-3 form-control"
+      required
+    >
+      <option value="">Please select a car</option>
+      <% for(var i = 0; i < cars.length; i++) { %>
+      <option value="<%= cars[i].id %>"><%= cars[i].brand %></option>
+      <% } %>
+    </select>
+  </div>
   <div class="row form-group">
     <label for="intervention-startDate" class="col-md-3"> startDate</label>
     <input
@@ -15,6 +28,7 @@
       name="startDate"
       value="<%= intervention.startDate %>"
       class="col-md-3 form-control"
+      required
     />
   </div>
   <div class="row form-group">
@@ -27,6 +41,7 @@
       name="estimatedTime"
       value="<%= intervention.estimatedTime %>"
       class="col-md-3 form-control"
+      required
     />
   </div>
   <div class="row form-group">
@@ -37,6 +52,7 @@
       name="notes"
       value="<%= intervention.notes %>"
       class="col-md-3 form-control"
+      required
     ></textarea>
   </div>
   <div class="row form-group">
@@ -47,6 +63,7 @@
       name="type"
       value="<%= intervention.type %>"
       class="col-md-3 form-control"
+      required
     />
   </div>
   <div class="row form-group">
@@ -78,9 +95,9 @@
       name="description"
       min="1"
       value="<%= intervention.description %>"
-    >
-type your description here</textarea
-    >
+      placeholder="type your description here"
+      required
+    ></textarea>
   </div>
   <div class="row form-group">
     <label for="intervention-staff" class="col-md-3"> staff</label>
@@ -101,7 +118,9 @@ type your description here</textarea
       id="intervention-client"
       name="client"
       class="col-md-3 form-control"
+      required
     >
+      <option value="">Please select a client</option>
       <% for(var i = 0; i < users.length; i++) { %>
       <option value="<%= users[i]._id %>"><%= users[i].first_name %></option>
       <% } %>

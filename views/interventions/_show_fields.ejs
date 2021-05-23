@@ -12,12 +12,19 @@
     </div>
     <div class="container">
       <div class="row form-group">
+        <label for="intervention-notes" class="col-md-3"> car</label>
+        <label
+          id="intervention-car"
+          type="text"
+          name="car"
+        /><%= intervention.car.brand %></label>
+      </div>
+      <div class="row form-group">
         <label for="intervention-startDate" class="col-md-3"> startDate</label>
         <label
           id="intervention-startDate"
           type="date"
           name="startDate"
-          value="<%= intervention.startDate %>"
         /><%= intervention.startDate.toLocaleString() %></label>
       </div>
       <div class="row form-group">
@@ -28,7 +35,6 @@
           id="intervention-estimatedTime"
           type="date"
           name="estimatedTime"
-          value="<%= intervention.estimatedTime %>"
         /><%= intervention.estimatedTime.toLocaleString() %></label>
       </div>
       <div class="row form-group">
@@ -38,7 +44,7 @@
           type="text"
           name="notes"
           value="<%= intervention.notes %>"
-        /><%= intervention.notes %></label>
+        /><%= intervention.notes %> </label> 
       </div>
       <div class="row form-group">
         <label for="intervention-type" class="col-md-3"> type</label>
@@ -59,7 +65,7 @@
       /><%= intervention.discount %></label>
       </div>
       <div class="row form-group">
-        <label for="intervention-price" class="col-md-3"> price</label>
+        <label for="intervention-price" class="col-md-3"> price with discount</label>
         <label
         id="intervention-price"
         type="text"
@@ -98,7 +104,7 @@
       /><%= intervention.client.first_name %></label>
       </div>
       <div class="row form-group">
-        <label for="intervention-item" class="col-md-3"> Item</label>
+        <label for="intervention-item" class="col-md-3"> Items</label>
         <% for(var i = 0; i < intervention.items.length; i++) { %>
         <label
         id="intervention-item"

@@ -14,12 +14,23 @@
   </div>
   <div class="container">
     <div class="row form-group">
+      <label for="car" class="col-md-3"> car</label>
+      <select id="car" name="car" class="col-md-3 form-control">
+        <% for( let i = 0; i < cars.length; i++ ) { %> <% if(intervention.car.id
+        == cars[i].id) { %>
+        <option selected value="<%=cars[i].id%>"><%=cars[i].brand%></option>
+        <% } else { %>
+        <option value="<%=cars[i].id%>"><%=cars[i].brand%></option>
+        <% } %> <% } %>
+      </select>
+    </div>
+    <div class="row form-group">
       <label for="intervention-startDate" class="col-md-3"> startDate</label>
       <input
         id="intervention-startDate"
         type="date"
         name="startDate"
-        value="<%= intervention.startDate %>"
+        value="<%= intervention.startDate == null ? '' : intervention.startDate.toISOString().split('T')[0] %>"
         class="col-md-3 form-control"
       />
     </div>
@@ -31,7 +42,7 @@
         id="intervention-estimatedTime"
         type="date"
         name="estimatedTime"
-        value="<%= intervention.estimatedTime %>"
+        value="<%=  intervention.estimatedTime == null ? '' : intervention.estimatedTime.toISOString().split('T')[0]%>"
         class="col-md-3 form-control"
       />
     </div>
@@ -91,43 +102,40 @@
       >
     </div>
     <div class="row form-group">
-      <label for="intervention-staff" class="col-md-3"> staff</label>
-      <select
-        id="intervention-staff"
-        name="staff"
-        class="col-md-3 form-control"
-        multiple
-      >
-        <% for(var i = 0; i < staffs.length; i++) { %>
-        <option value="<%= staffs[i]._id %>">
-          <%= staffs[i].first_name %>
+      <label for="staffs" class="col-md-3"> staff</label>
+      <select id="staffs" name="staffs" class="col-md-3 form-control" multiple>
+        <% for( let i = 0; i < staffs.length; i++ ) { %> <%
+        if(interventionStaffs.includes(staffs[i].id)) { %>
+        <option selected value="<%=staffs[i].id%>">
+          <%=staffs[i].first_name%>
         </option>
-        <% } %>
+        <% } else { %>
+        <option value="<%=staffs[i].id%>"><%=staffs[i].first_name%></option>
+        <% } %> <% } %>
       </select>
     </div>
     <div class="row form-group">
-      <label for="intervention-client" class="col-md-3"> Client</label>
-      <select
-        id="intervention-client"
-        name="client"
-        class="col-md-3 form-control"
-      >
-        <% for(var i = 0; i < users.length; i++) { %>
-        <option value="<%= users[i]._id %>"><%= users[i].first_name %></option>
-        <% } %>
+      <label for="client" class="col-md-3"> Client</label>
+      <select id="client" name="client" class="col-md-3 form-control">
+        <% for( let i = 0; i < users.length; i++ ) { %> <%
+        if(intervention.client.id == users[i]._id) { %>
+        <option selected value="<%=users[i]._id%>">
+          <%=users[i].first_name%>
+        </option>
+        <% } else { %>
+        <option value="<%=users[i]._id%>"><%=users[i].first_name%></option>
+        <% } %> <% } %>
       </select>
     </div>
     <div class="row form-group">
-      <label for="intervention-item" class="col-md-3"> Item</label>
-      <select
-        id="intervention-item"
-        name="item"
-        class="col-md-3 form-control"
-        multiple
-      >
-        <% for(var i = 0; i < items.length; i++) { %>
-        <option value="<%= items[i].id %>"><%= items[i].name %></option>
-        <% } %>
+      <label for="items" class="col-md-3"> Items</label>
+      <select name="items" id="items" multiple>
+        <% for( let i = 0; i < items.length; i++ ) { %> <%
+        if(interventionItems.includes(items[i].id)) { %>
+        <option selected value="<%=items[i].id%>"><%=items[i].name%></option>
+        <% } else { %>
+        <option value="<%=items[i].id%>"><%=items[i].name%></option>
+        <% } %> <% } %>
       </select>
     </div>
   </div>
