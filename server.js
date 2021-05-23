@@ -5,6 +5,7 @@ const bodyparser = require("body-parser");
 const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const methodOverride = require("method-override");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(morgan("tiny"));
 
 //bodyParser
 app.use(bodyparser.urlencoded({ limit: "10mb", extended: true }));
+app.use(cookieParser());
 
 // routes
 const indexRouter = require("./routes/index");
@@ -26,6 +28,7 @@ const staffRouter = require("./routes/staffs");
 const interventionRouter = require("./routes/Interventions");
 const carRouter = require("./routes/cars");
 const shopRouter = require("./routes/shop");
+const authentificationRouter = require("./routes/userAuth");
 
 //view engine
 app.set("view engine", "ejs");
@@ -81,6 +84,7 @@ app.use("/api/staff", staffRouter);
 app.use("/interventions", interventionRouter);
 app.use("/cars", carRouter);
 app.use("/shop", shopRouter);
+app.use("/auth", authentificationRouter);
 
 app.listen(PORT, () => {
   console.log("server is running on " + PORT);
