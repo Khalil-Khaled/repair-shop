@@ -10,6 +10,11 @@ router.get("/login", (req, res) => {
   res.render("authentification/login");
 });
 
+router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.redirect("/");
+});
+
 router.get("/register", (req, res) => {
   res.render("authentification/register");
 });

@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
     query = query.where("car", car);
   }
   try {
-    const interventions = await query.sort({ status: -1 }).exec();
+    const interventions = await query.sort({ status: -1, startDate: 1 }).exec();
     res.render("interventions/index", {
       interventions: interventions,
       searchOptions: req.query,
