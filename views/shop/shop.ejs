@@ -21,7 +21,12 @@
             />
             <div class="product-price">
               <p><%= item.price %> TND</p>
-              <button class="btn-sm btn-danger">Add to Cart</button>
+              <form method="POST" action="shop/addItemToCart">
+                <input type="hidden" name="id" value="<%= item.id %>" />
+                <button type="submit" class="btn-sm btn-danger">
+                  Add to Cart
+                </button>
+              </form>
             </div>
           </div>
           <% }) %>
@@ -49,7 +54,12 @@
             />
             <div class="product-price">
               <p><%= item.price %> TND</p>
-              <button class="btn-sm btn-danger">Add to Cart</button>
+              <form method="POST" action="shop/addItemToCart">
+                <input type="hidden" name="id" value="<%= item.id %>" />
+                <button type="submit" class="btn-sm btn-danger">
+                  Add to Cart
+                </button>
+              </form>
             </div>
           </div>
           <% }) %>
@@ -77,7 +87,12 @@
             />
             <div class="product-price">
               <p><%= item.price %> TND</p>
-              <button class="btn-sm btn-danger">Add to Cart</button>
+              <form method="POST" action="shop/addItemToCart">
+                <input type="hidden" name="id" value="<%= item.id %>" />
+                <button type="submit" class="btn-sm btn-danger">
+                  Add to Cart
+                </button>
+              </form>
             </div>
           </div>
           <% }) %>
@@ -105,7 +120,12 @@
             />
             <div class="product-price">
               <p><%= item.price %> TND</p>
-              <button class="btn-sm btn-danger">Add to Cart</button>
+              <form method="POST" action="shop/addItemToCart">
+                <input type="hidden" name="id" value="<%= item.id %>" />
+                <button type="submit" class="btn-sm btn-danger">
+                  Add to Cart
+                </button>
+              </form>
             </div>
           </div>
           <% }) %>
@@ -126,7 +146,7 @@
           <h1>Featured Offers</h1>
         </div>
         <div class="products">
-          <% offers.forEach(offer => { %>
+          <% featuredOffers.forEach(offer => { %>
           <div class="product">
             <p><%= offer.name %></p>
             <img
@@ -153,20 +173,34 @@
         </div>
       </div>
     </section>
+
     <section>
       <div class="products-wrapper">
         <div class="group-title">
-          <h1>Featured Offers</h1>
+          <h1>Latest Offers</h1>
         </div>
         <div class="products">
+          <% latestOffers.forEach(offer => { %>
           <div class="product">
-            <p>Bumpers & Components</p>
-            <img src="img/car parts/bumpers.jpg" alt="" />
+            <p><%= offer.name %></p>
+            <img
+              src="<%= offer.offerImagePath %>"
+              alt=""
+              width="150px"
+              height="150px"
+              style="object-fit: contain"
+            />
             <div class="product-price">
-              <p>25 TND</p>
-              <button class="btn-sm btn-danger">Add to Cart</button>
+              <p><%= offer.price %> TND</p>
+              <form method="POST" action="shop/addOfferToCart">
+                <input type="hidden" name="id" value="<%= offer.id %>" />
+                <button type="submit" class="btn-sm btn-danger">
+                  Add to Cart
+                </button>
+              </form>
             </div>
           </div>
+          <% }) %>
         </div>
         <div class="see-all">
           <a href="">see all <i class="fas fa-chevron-right"></i></a>

@@ -22,9 +22,32 @@ router.get("/", async (req, res) => {
     .find()
     .populate("offerItems")
     .populate("offerFreeItems");
+  // console.log(offers);
+  let featuredOffers = offers.sort((offerA, offerB) => {
+    countA = offerA.cartCount;
+    countB = offerB.cartCount;
+    if (countA < countB) return 1;
+    if (countA > countB) return -1;
+    else return 0;
+  });
+  featuredOffers = featuredOffers.slice(0, 4);
+  // console.log(featuredOffers);
+  let latestOffers = offers.sort((offerA, offerB) => {
+    dateA = new Date(offerA.issueDate);
+    dateB = new Date(offerB.issueDate);
+    if (dateA < dateB) return 1;
+    if (dateA > dateB) return -1;
+    else return 0;
+  });
+  latestOffers.forEach((offer) => {
+    console.log(offer.issueDate);
+  });
+  // console.log(latestOffers);
+  latestOffers = latestOffers.slice(0, 4);
   res.render("shop/shop", {
     items,
-    offers,
+    featuredOffers,
+    latestOffers,
     bodyParts,
     lights,
     accessories,
@@ -37,6 +60,18 @@ router.post("/addOfferToCart", async (req, res) => {
     const addedOffer = await offer.findById(req.body.id);
     addedOffer.cartCount++;
     await addedOffer.save();
+  } catch (error) {
+    console.log(error);
+  }
+  res.status(200);
+  res.redirect("/shop");
+});
+
+router.post("/addItemToCart", async (req, res) => {
+  try {
+    const addedItem = await ItemDB.findById(req.body.id);
+    addedItem.cartCount++;
+    await addedItem.save();
   } catch (error) {
     console.log(error);
   }
