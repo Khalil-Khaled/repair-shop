@@ -26,7 +26,6 @@
     style="display: flex; align-items: center; justify-content: space-between"
   >
     <h1>All Interventions</h1>
-    <a class="btn btn-danger" href="/interventions/new"><i class="fas fa-plus"></i></a>
   </div>
     <!-- form handling -->
     <% if(interventions.length > 0) {%>
@@ -38,7 +37,7 @@
           <th>Car</th>
           <th>Price</th>
           <th>Status</th>
-          <th>Actions</th>
+          
         </tr>
       </thead>
       <tbody>    
@@ -52,29 +51,7 @@
           <td><%= interventions[i].car.brand %></td>
           <td><%= interventions[i].price %></td>
           <td><%= interventions[i].status %></td>
-          <td>
-            <span
-            class="text-gradient"
-            style="display: flex; position: absolute; font-size: 1.2rem"
-          >
-            <span class="text-gradient"
-                >
-            <a style="color: black" href="/interventions/<%= interventions[i].id %>"><i class="fas fa-pencil-alt"></i
-              ></a>
-            </span>
-            <form
-              method="POST"
-              action="/interventions/done/<%= interventions[i].id %>?_method=PUT"
-            >
-            <button
-                type="submit"
-                class="fas fa-check"
-                style="background: none; border: none"
-              ></button>
-              
-            </form>
-          </span>
-          </td>
+         
         </tr>
         <% }
              %>

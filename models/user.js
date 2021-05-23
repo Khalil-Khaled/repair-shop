@@ -29,6 +29,12 @@ var schema = new mongoose.Schema({
   },
   gender: String,
   status: String,
+  cars: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "car",
+    },
+  ],
 });
 
 const Userdb = mongoose.model("userdb", schema);

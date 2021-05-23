@@ -28,6 +28,7 @@ var interventionSchema = new mongoose.Schema({
   status: String,
   discount: String,
   client: { type: mongoose.Schema.Types.ObjectId, ref: "userdb" },
+  car: { type: mongoose.Schema.Types.ObjectId, ref: "car" },
   staffs: [
     {
       type: mongoose.Schema.Types.ObjectId,

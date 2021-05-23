@@ -70,11 +70,31 @@
               <a class="dropdown-item" href="/cars">Manage cars</a>
             </div>
           </li>
-          <li class="nav-item active">
+
+        </li>
+        <li class="nav-item dropdown active">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            User Panel
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="nav-link" href="/cars/new"
-              >Register your car <span class="sr-only">(current)</span></a
-            >
-          </li>
+            >Register your car <span class="sr-only">(current)</span></a
+          >
+          <a class="dropdown-item" href="/interventions/client"
+          >Interventions</a
+        >
+          </div>
+        </li>
+
+          
         </ul>
       </div>
     </nav>
