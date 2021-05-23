@@ -14,6 +14,7 @@
         name="car"
         value="<%= car.brand %>"
         class="col-md-3 form-control"
+        required
       />
     </div>
     <div class="row form-group">
@@ -26,6 +27,7 @@
         name="model"
         value="<%= car.model %>"
         class="col-md-3 form-control"
+        required
 
       />
     </div>
@@ -37,6 +39,7 @@
         name="platesNumber"
         value="<%= car.platesNumber %>"
         class="col-md-3 form-control"
+        required
       >
     </input>
     </div>
@@ -48,6 +51,8 @@
         name="year"
         value="<%= car.year %>"
         class="col-md-3 form-control"
+        required
+        
         
       />
     </div>
@@ -64,7 +69,7 @@
     </div>
     <div class="row form-group">
       <label for="car-carStatus" class="col-md-3"> carStatus</label>
-      <select id="car-carStatus" name="carStatus" class="col-md-3 form-control">
+      <select id="car-carStatus" name="carStatus" class="col-md-3 form-control" required>
           <option value="Completely broken">
             Completely broken
           </option>
